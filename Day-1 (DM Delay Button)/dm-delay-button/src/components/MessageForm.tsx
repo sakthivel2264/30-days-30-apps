@@ -2,6 +2,7 @@ import { Textarea } from "./ui/textarea"
 import { Button } from "./ui/button"
 import { useState } from "react"
 import { Input } from "./ui/input"
+import { toast } from "sonner"
 
 const MessageForm = () => {
 
@@ -15,6 +16,10 @@ const MessageForm = () => {
         setIsSending(true)
         const id = setTimeout(() => {
             setSentMessage(message)
+            toast.success(`Message sent`, {
+                duration: 3000,
+                position: "top-right",
+            })
             setMessage("")
             setIsSending(false)
         }, delay * 1000)

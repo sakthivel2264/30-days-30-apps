@@ -118,3 +118,49 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom component styles */
+.strength-meter {
+  @apply w-full h-2 bg-gray-200 rounded-full overflow-hidden;
+  transition: all 0.3s ease;
+}
+
+.strength-bar {
+  @apply h-full transition-all duration-500 ease-out;
+}
+
+.password-input {
+  @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors;
+}
+
+.btn-primary {
+  @apply px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors;
+}
+
+.security-card {
+  @apply bg-white rounded-xl shadow-md border border-gray-100 p-6 hover:shadow-lg transition-shadow;
+}
+
+/* Animation for breach check results */
+.breach-result {
+  animation: slideUp 0.5s ease-out;
+}
+
+/* Custom scrollbar */
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}

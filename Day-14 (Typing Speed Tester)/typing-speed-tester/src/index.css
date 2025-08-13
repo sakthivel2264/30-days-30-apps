@@ -118,3 +118,48 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom styles for typing interface */
+.typing-cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Smooth transitions for character states */
+.char-correct {
+  @apply bg-green-100 text-green-800;
+  transition: all 0.15s ease;
+}
+
+.char-incorrect {
+  @apply bg-red-100 text-red-800;
+  transition: all 0.15s ease;
+}
+
+.char-current {
+  @apply bg-blue-200;
+  animation: pulse 1s infinite;
+}
+
+/* Custom scrollbar */
+.typing-text::-webkit-scrollbar {
+  width: 4px;
+}
+
+.typing-text::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+
+.typing-text::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 2px;
+}
+
+.typing-text::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}

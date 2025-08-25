@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+python-multipart
+pillow>=10.4.0
+transformers
+torch
+torchvision  
+torchaudio
+python-jose
+opencv-python
+numpy
+easyocr
+protobuf==3.20.1
+tiktoken
+sentencepiece

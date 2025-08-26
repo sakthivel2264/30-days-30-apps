@@ -145,56 +145,6 @@ async def root():
         "device": device
     }
 
-@app.post("/cartoonify")
-async def cartoonify_endpoint(file: UploadFile = File(...)):
-    if not file.content_type.startswith('image/'):
-        raise HTTPException(status_code=400, detail="File must be an image")
-    
-    try:
-        # Read and process image
-        image_bytes = await file.read()
-        
-        # Convert to PIL Image for Hugging Face model
-        pil_image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
-        
-        # Try Hugging Face model first, fallback to OpenCV if needed
-        try:
-            if cartoon_pipeline is not None:
-                cartoon_pil = cartoonify_with_huggingface(pil_image)
-                
-                # Convert PIL back to bytes
-                img_buffer = io.BytesIO()
-                cartoon_pil.save(img_buffer, format='PNG')
-                img_bytes = img_buffer.getvalue()
-                
-            else:
-                raise Exception("HF model not available")
-                
-        except Exception as hf_error:
-            print(f"Hugging Face model failed: {hf_error}, using OpenCV fallback")
-            
-            # Fallback to OpenCV method
-            nparr = np.frombuffer(image_bytes, np.uint8)
-            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-            
-            if img is None:
-                raise HTTPException(status_code=400, detail="Could not decode image")
-            
-            cartoon_img = cartoonify_image_opencv(img)
-            
-            # Convert to bytes
-            _, encoded_img = cv2.imencode('.png', cartoon_img)
-            img_bytes = encoded_img.tobytes()
-        
-        return StreamingResponse(
-            io.BytesIO(img_bytes), 
-            media_type="image/png",
-            headers={"Content-Disposition": "inline; filename=cartoon.png"}
-        )
-        
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error processing image: {str(e)}")
-
 @app.post("/cartoonify-advanced")
 async def cartoonify_advanced(
     file: UploadFile = File(...),

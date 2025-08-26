@@ -67,7 +67,7 @@ const ImageCartoonifier: React.FC = () => {
     formData.append('file', state.selectedImage);
 
     try {
-      const response = await fetch('http://localhost:8000/cartoonify', {
+      const response = await fetch('http://localhost:8000/cartoonify-advanced', {
         method: 'POST',
         body: formData,
       });
